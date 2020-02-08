@@ -27,11 +27,11 @@ vistorId = []
 transactions = []
 
 
-initial_sql=f'SELECT vistorId,transactions,date 
-            FROM FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-            WHERE
-            _TABLE_SUFFIX BETWEEN '20170701'
-            AND '20170731''
+# initial_sql=f'SELECT vistorId,transactions,date 
+#             FROM FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+#             WHERE
+#             _TABLE_SUFFIX BETWEEN '20170701'
+#             AND '20170731''
 
 create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
 
