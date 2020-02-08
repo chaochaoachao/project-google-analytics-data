@@ -25,6 +25,7 @@ client = bigquery.Client()
 
 vistorId = []
 transactions = []
+uinput = "20170731"
 
 
 # initial_sql=f'SELECT vistorId,transactions,date 
@@ -33,7 +34,7 @@ transactions = []
 #             _TABLE_SUFFIX BETWEEN '20170701'
 #             AND '20170731''
 
-create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
+
 
 # create route that renders index.html template
 @app.route("/")
@@ -45,14 +46,14 @@ def home():
 @app.route("/send", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        filtered_query = client.query("""{intital_sql}""")
-        results = filtered_query.results()
+        uinput = request.form["input_date"]
         return redirect("/", code=302)
     return render_template("index.html")
 
 
 @app.route("/api/filtered_data")
 def filtered_Data():
+    create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{uinput}'
     filtered_query = client.query("""{create_temp_sql}""")
     results = filtered_query.results()
     visitorId = [result[0] for result in results]
