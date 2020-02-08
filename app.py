@@ -25,6 +25,8 @@ client = bigquery.Client()
 
 vistorId = []
 transactions = []
+uinput = "20170731"
+
 
 
 initial_sql=f"""
@@ -53,6 +55,15 @@ initial_sql=f"""
 
 #create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
 
+# initial_sql=f'SELECT vistorId,transactions,date 
+#             FROM FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+#             WHERE
+#             _TABLE_SUFFIX BETWEEN '20170701'
+#             AND '20170731''
+
+
+
+
 # create route that renders index.html template
 @app.route("/")
 def home():
@@ -62,6 +73,7 @@ def home():
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])
 def send():
+
     filtered_query = client.query("""
     SELECT  visitorId,
             visitId,
@@ -92,11 +104,14 @@ def send():
     #return render_template("index.html")
 
 
+
 @app.route("/api/filtered_data")
 def filtered_Data():
+
     filtered_query = client.query(initial_sql)
     results = filtered_query.result()
     print(results)
+
     visitorId = [result[0] for result in results]
     transactions = [result[1] for result in results]
 
