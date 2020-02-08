@@ -18,14 +18,17 @@ app = Flask(__name__)
 
 # create route that renders index.html template
 from google.cloud import bigquery
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
+
 client = bigquery.Client()
 
-vistorId = 
-transactions = 
+vistorId = []
+transactions = []
 
 
-sql_command = f'SELECT {vistorId},{transactions}, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
-create_temp_sql= f'SELECT {vistorId},{transactions}, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
+initial_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
+create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
 
 # create route that renders index.html template
 @app.route("/")
@@ -37,15 +40,15 @@ def home():
 @app.route("/send", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        filtered_query = client.query("""{sql_command}""")
+        filtered_query = client.query("""{intital_sql}""")
         results = filtered_query.results()
         return redirect("/", code=302)
-    return render_template("form.html")
+    return render_template("index.html")
 
 
 @app.route("/api/filtered_data")
 def filtered_Data():
-    filtered_query = client.query("""{sql_command}""")
+    filtered_query = client.query("""{create_temp_sql}""")
     results = filtered_query.results()
     visitorId = [result[0] for result in results]
     transactions = [result[1] for result in results]
