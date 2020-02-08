@@ -22,9 +22,8 @@ function initialize(){
 
 
 function updatePlot() {
-    d3.json("/test").then(function (response) {
-        console.log(response)
-        var temp_data = response;
+    
+}
     
     //     console.log('hello')
     //     var temp_data = response;
@@ -62,7 +61,7 @@ function updatePlot() {
 
     //     Plotly.newPlot("line", data, layout);
     // });
-})}
+//})}
 
 //initialize();
 updatePlot();
