@@ -28,11 +28,39 @@ transactions = []
 uinput = "20170731"
 
 
+
+initial_sql=f"""
+    SELECT  visitorId,
+            visitId,
+            visitStartTime,
+            date,
+            totals.visits,
+            totals.hits,
+            totals.timeonsite,
+            totals.bounces,
+            totals.transactions,
+            totals.transactionrevenue,
+            totals.newvisits,
+            totals.timeonscreen,
+            trafficsource.campaign,
+            trafficsource.keyword,
+            device.ismobile,
+            device.operatingsystem,
+            geonetwork.country,
+            geonetwork.city,
+            geonetwork.networkdomain 
+            FROM 
+            `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+            WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170702pyt' """
+
+#create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
+
 # initial_sql=f'SELECT vistorId,transactions,date 
 #             FROM FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
 #             WHERE
 #             _TABLE_SUFFIX BETWEEN '20170701'
 #             AND '20170731''
+
 
 
 
@@ -45,17 +73,45 @@ def home():
 # Query the database and send the jsonified results
 @app.route("/send", methods=["GET", "POST"])
 def send():
-    if request.method == "POST":
-        uinput = request.form["input_date"]
-        return redirect("/", code=302)
-    return render_template("index.html")
+
+    filtered_query = client.query("""
+    SELECT  visitorId,
+            visitId,
+            visitStartTime,
+            date,
+            totals.visits,
+            totals.hits,
+            totals.timeonsite,
+            totals.bounces,
+            totals.transactions,
+            totals.transactionrevenue,
+            totals.newvisits,
+            totals.timeonscreen,
+            trafficsource.campaign,
+            trafficsource.keyword,
+            device.ismobile,
+            device.operatingsystem,
+            geonetwork.country,
+            geonetwork.city,
+            geonetwork.networkdomain 
+            FROM 
+            `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+            WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170710pyt' """)
+    results = filtered_query.result().to_dataframe()
+
+    return jsonify(results.to_dict())
+        #return redirect("/", code=302)
+    #return render_template("index.html")
+
 
 
 @app.route("/api/filtered_data")
 def filtered_Data():
-    create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{uinput}'
-    filtered_query = client.query("""{create_temp_sql}""")
-    results = filtered_query.results()
+
+    filtered_query = client.query(initial_sql)
+    results = filtered_query.result()
+    print(results)
+
     visitorId = [result[0] for result in results]
     transactions = [result[1] for result in results]
 
