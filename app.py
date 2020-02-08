@@ -54,15 +54,12 @@ initial_sql=f"""
 #create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
 
 # create route that renders index.html template
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 
 # Query the database and send the jsonified results
-@app.route("/test")
+@app.route("/")
 def send():
-    filtered_query = client.query("""
+    filtered_query = bigquery.Client().query("""
     SELECT  visitorId,
             visitId,
             visitStartTime,
@@ -86,8 +83,10 @@ def send():
             `bigquery-public-data.google_analytics_sample.ga_sessions_*`
             WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170702pyt' """)
     results = filtered_query.result().to_dataframe()
-    test = 'THIS IS A TEST'
-    return test
+    result_1=results.to_dict()
+    #test = 'THIS IS A TEST'
+    #return jsonify([result_1])
+    return render_template("index.html", data=result_1)
 
 
 # @app.route("/send",methods=["GET", "POST"])
