@@ -19,7 +19,7 @@ app = Flask(__name__)
 # create route that renders index.html template
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/khaledkhatib/Documents/GitHub/project-google-analytics-data/BigQueryCreds.json"
 
 client = bigquery.Client()
 
@@ -27,11 +27,7 @@ vistorId = []
 transactions = []
 
 
-initial_sql=f'SELECT vistorId,transactions,date 
-            FROM FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-            WHERE
-            _TABLE_SUFFIX BETWEEN '20170701'
-            AND '20170731''
+initial_sql=f"SELECT vistorId,transactions,date FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*` WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170731'"
 
 create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
 
@@ -62,7 +58,6 @@ def filtered_Data():
         "visitorId": visitorId,
         "transactions": transactions,
     }]
-
     return jsonify(filtered_data)
 
 
