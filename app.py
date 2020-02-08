@@ -20,9 +20,12 @@ app = Flask(__name__)
 from google.cloud import bigquery
 client = bigquery.Client()
 
+vistorId = 
+transactions = 
+
 
 sql_command = f'SELECT {vistorId},{transactions}, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
-
+create_temp_sql= f'SELECT {vistorId},{transactions}, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}`'
 
 # create route that renders index.html template
 @app.route("/")
