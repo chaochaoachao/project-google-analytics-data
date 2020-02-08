@@ -20,7 +20,6 @@ function initialize(){
     metadata(id);
   
     
-    
     }
   )}
 
@@ -53,5 +52,5 @@ function updatePlot() {
   });
 }
 
-initialize();
+//initialize();
 updatePlot();
