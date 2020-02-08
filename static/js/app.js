@@ -1,6 +1,3 @@
-
-
-
 function initialize(){
 
     var dropdown = d3.select("#selDataset");
@@ -25,7 +22,7 @@ function initialize(){
 
 function updatePlot() {
     /* data route */
-  var url = "/api/filtered_data";
+  var url = "/send";
   d3.json(url).then(function(response) {
 
     console.log(response);
