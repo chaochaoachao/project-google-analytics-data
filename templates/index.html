@@ -10,10 +10,8 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script> var data = {{data|tojson}} </script>
 
-  <script>
-    var data = {{data|tojson}}
-</script>
 </head>
 
 <body>
@@ -91,9 +89,9 @@
       <span class="bottom">Tracking User Behaviors</span>
     </footer>
   </div>
-
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  
 </body>
 
 </html>
