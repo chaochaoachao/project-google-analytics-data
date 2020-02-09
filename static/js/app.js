@@ -1,31 +1,59 @@
-function initialize(){
 
-    var dropdown = d3.select("#selDataset");
+function updatePlot(data) {
 
-  
-    d3.json("../samples.json").then((data) => {
-    //console.log(data);
-  
-    //append values to dropdown button
-    data.names.forEach(function(name){
-      dropdown.append("option").text(name).property("value");})
-  
-    var id =data.names[0];
-  
-    
-    updatePlot(id);
-    metadata(id);
-  
-    
+    var temp_data=data;
+    var temp_data_key=[];
+
+    //get all cat keys
+    Object.keys(temp_data).forEach((k,i) => 
+    temp_data_key.push(k));
+    //console.log(temp_data_key);
+
+    //convert objects to arrays
+    var transactions= Object.keys(temp_data.total_transactions).map(i => temp_data.total_transactions[i]);
+    var date = Object.keys(temp_data.date).map(i => temp_data.date[i]);
+
+    console.log(transactions);
+    console.log(date);
+
+    //change datetime format for the plotly
+    for (i=0;i < date.length;i++){
+        date[i]=date[i].toString().replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
     }
-  )}
 
+    //console.log(transactions);
+    console.log(date);
 
-function updatePlot() {
+    //for (i = 0; i < temp_data_key.length; i++) {
+    //var cat=temp_data_key[i]
+    //console.log(cat)
+    //console.log(Object.values(temp_data.cat))
     
+    // var trace1 = {
+    //     x:date,
+    //     y:transactions,
+    //     type: 'scatter'
+    //  };
+
+    var trace1 = [
+        {
+          x: date,
+          y: transactions,
+          type: 'scatter'
+        }
+      ];
+      
+    var data = trace1;
+
+    var layout = {
+        title: 'Basic Time Series',
+      };
+
+    Plotly.newPlot("line", data, layout);
+  
 }
+
     
-    //     console.log('hello')
     //     var temp_data = response;
     //     console.log(temp_data)
     //     //var bounces= temp_data.bounces(data=>data.)
@@ -43,7 +71,6 @@ function updatePlot() {
     //     console.log(bounces)
     //     });
         
-
         
     //     // var trace1 = {
     //     //     x:date,
@@ -63,5 +90,4 @@ function updatePlot() {
     // });
 //})}
 
-//initialize();
-updatePlot();
+updatePlot(data);

@@ -36,7 +36,7 @@ initial_sql=f"""
             totals.hits,
             totals.timeonsite,
             totals.bounces,
-            totals.transactions,
+            totals.transactions, 
             totals.transactionrevenue,
             totals.newvisits,
             totals.timeonscreen,
@@ -60,32 +60,22 @@ initial_sql=f"""
 @app.route("/")
 def send():
     filtered_query = bigquery.Client().query("""
-    SELECT  visitorId,
-            visitId,
-            visitStartTime,
-            date,
-            totals.visits,
-            totals.hits,
-            totals.timeonsite,
-            totals.bounces,
-            totals.transactions,
-            totals.transactionrevenue,
-            totals.newvisits,
-            totals.timeonscreen,
-            trafficsource.campaign,
-            trafficsource.keyword,
-            device.ismobile,
-            device.operatingsystem,
-            geonetwork.country,
-            geonetwork.city,
-            geonetwork.networkdomain 
-            FROM 
-            `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-            WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170702pyt' """)
+        SELECT 
+        date,
+        SUM ( totals.transactions ) AS total_transactions
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '20170701'
+        AND '20170703'
+        GROUP BY
+        date
+        ORDER BY
+        date ASC 
+        """)
     results = filtered_query.result().to_dataframe()
     result_1=results.to_dict()
-    #test = 'THIS IS A TEST'
-    #return jsonify([result_1])
+
     return render_template("index.html", data=result_1)
 
 
