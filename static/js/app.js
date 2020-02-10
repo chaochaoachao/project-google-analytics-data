@@ -1,3 +1,6 @@
+function optionChanged(date){
+  updatePlot(date);
+}
 
 function updatePlot(data) {
 
@@ -34,7 +37,9 @@ function updatePlot(data) {
     //     y:transactions,
     //     type: 'scatter'
     //  };
+    
 
+    //line chart
     var trace1 = [
         {
           x: date,
@@ -42,17 +47,18 @@ function updatePlot(data) {
           type: 'scatter'
         }
       ];
-      
     var data = trace1;
-
     var layout = {
         title: 'Basic Time Series',
+        xaxis: { title: "Date" },
+        yaxis: { title: "Transactions"}
+      
       };
-
     Plotly.newPlot("line", data, layout);
+
+    
   
 }
-
     
     //     var temp_data = response;
     //     console.log(temp_data)
@@ -68,26 +74,33 @@ function updatePlot(data) {
     //         bounces.push(value);
         
     //     });
-    //     console.log(bounces)
-    //     });
-        
-        
-    //     // var trace1 = {
-    //     //     x:date,
-    //     //     y:tranctions,
-    //     //     type: 'scatter'
-    //     //   };
 
-    //     var trace1 = {
-    //         x:[1,2,3],
-    //         y:[2,3,4],
-    //         type: 'scatter'
-    //     };
-        
-    //     var data = trace1;
+var button = d3.select("#filter-btn");
 
-    //     Plotly.newPlot("line", data, layout);
-    // });
-//})}
+button.on("click", function() {
+
+// Select the start&end date 
+var inputStartDate = d3.select("#datetime1");
+var inputEndDate=d3.select("#datetime2");
+
+// Get the value property of the input element
+var StatrDate = inputStartDate.property("value");
+var EndDate = inputEndDate.property("value");
+
+
+//to detect if there is a input to filter
+if (StatrDate != ''&& EndDate !=''){
+//apply the change to the variable in the query script
+//var filteredData = data.filter(data => data.datetime === inputValue);
+console.log(StatrDate);
+console.log(EndDate);
+//updatePlot(filteredData)
+;} 
+
+else {
+  var filteredData = data;
+  console.log("missing input value")
+}
+}); 
 
 updatePlot(data);

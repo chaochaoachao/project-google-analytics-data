@@ -25,7 +25,8 @@ client = bigquery.Client()
 
 vistorId = []
 transactions = []
-uinput=""
+StartDate='20170701'
+EndDate='20170703'
 
 initial_sql=f"""
     SELECT  visitorId,
@@ -66,8 +67,8 @@ def send():
         FROM
         `bigquery-public-data.google_analytics_sample.ga_sessions_*`
         WHERE
-        _TABLE_SUFFIX BETWEEN '20170701'
-        AND '20170703'
+        _TABLE_SUFFIX BETWEEN '{StartDate}'
+        AND '{EndDate}'
         GROUP BY
         date
         ORDER BY
@@ -79,13 +80,15 @@ def send():
     return render_template("index.html", data=result_1)
 
 
-# @app.route("/send",methods=["GET", "POST"])
-# def send():
-#     if request.method == "POST":
-#         #capture the input date and return it as uinput
-#         uinput = request.form["input_date"]
-#         return redirect("/", code=302)
-#     return render_template("index.html")
+@app.route("/send", methods=["GET", "POST"])
+def sendfromjs():
+    if request.method == "POST":
+        #capture the input dates 
+        StartDate = request.form["input_date1"]
+        EndDate = request.form["input_date2"]
+        return redirect("/", code=302)
+    return render_template("index.html")
+
 
 
 @app.route("/api/filtered_data")
