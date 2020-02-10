@@ -42,10 +42,12 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
 
-                        <input class="form-control" id="datetime" name="input_date" type="text" placeholder="1/11/2017">
-
+                        <label for="date">Enter a Start Date</label>
+                        <input class="form-control" id="datetime1" name="input_date1" type="text" placeholder="20170701">
+                        <label for="date">Enter a End Date</label>
+                        <input class="form-control" id="datetime2" name="input_date2" type="text" placeholder="20170703">
+                      
                       </li>
                     </ul>
                   </div>
@@ -74,7 +76,7 @@
               <div id="line"></div>
             </div>
             <div class="col-md-5">
-              <div id="gauge"></div>
+              <div id="geomap"></div>
             </div>
           </div>
           <div class="row">
@@ -89,6 +91,7 @@
       <span class="bottom">Tracking User Behaviors</span>
     </footer>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   
