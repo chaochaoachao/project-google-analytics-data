@@ -10,8 +10,8 @@ function initializePlot(data) {
     var transactions= Object.keys(temp_data.total_transactions).map(i => temp_data.total_transactions[i]);
     var date = Object.keys(temp_data.date).map(i => temp_data.date[i]);
 
-    console.log(transactions);
-    console.log(date);
+    //console.log(transactions);
+    //console.log(date);
 
     //change datetime format for the plotly
     for (i=0;i < date.length;i++){
@@ -26,6 +26,7 @@ function initializePlot(data) {
           type: 'scatter'
         }
       ];
+
     var data = trace1;
     var layout = {
         title: 'Basic Time Series',
@@ -52,8 +53,16 @@ function initializePlot(data) {
 
 function updatePlot(StartDate,EndDate){
     d3.json("/api/filtered_data/" + StartDate + "/" + EndDate).then(function(response) {
-    var data = response;
-    console.log(data);
+    var new_data = response;
+    console.log("here",new_data);
+    
+    var transactions= Object.keys(new_data.total_transactions).map(i => new_data.total_transactions[i]);
+    var date = Object.keys(new_data.date).map(i => new_data.date[i]);
+
+    console.log(transactions);
+    console.log(date);
+    
+
     })
 }
 
