@@ -64,6 +64,7 @@ function updatePlot(StartDate,EndDate){
 
 initializePlot(data);
 
+
 var button = d3.select("#filter-btn");
 
 

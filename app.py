@@ -12,6 +12,8 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
+
+
 #################################################
 # Flask Setup
 #################################################
@@ -24,7 +26,7 @@ app = Flask(__name__)
 # create route that renders index.html template
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/khaledkhatib/Documents/GitHub/project-google-analytics-data/BigQueryCreds.json"
 
 client = bigquery.Client()
 engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
@@ -55,7 +57,6 @@ def send():
         """)
     results = filtered_query.result().to_dataframe()
     result_1=results.to_dict()
-
     return render_template("index.html", data=result_1)
 
 
@@ -84,3 +85,4 @@ def Data(startdate, enddate):
 
 if __name__ == "__main__":
     app.run()
+
