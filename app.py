@@ -1,11 +1,15 @@
 # import necessary libraries
+import logging
 import os
+import sys
 from flask import (
     Flask,
     render_template,
     jsonify,
     request,
     redirect)
+
+
 
 #################################################
 # Flask Setup
@@ -67,8 +71,8 @@ def send():
         FROM
         `bigquery-public-data.google_analytics_sample.ga_sessions_*`
         WHERE
-        _TABLE_SUFFIX BETWEEN '{StartDate}'
-        AND '{EndDate}'
+        _TABLE_SUFFIX BETWEEN '""" + StartDate +"""'
+        AND '""" + EndDate + """'
         GROUP BY
         date
         ORDER BY
@@ -76,17 +80,15 @@ def send():
         """)
     results = filtered_query.result().to_dataframe()
     result_1=results.to_dict()
-
+    print('---------')
     return render_template("index.html", data=result_1)
 
 
-@app.route("/send", methods=["GET", "POST"])
+@app.route("/send", methods = ['GET', 'POST'])
 def sendfromjs():
+    #print("Hello world!")
     if request.method == "POST":
-        #capture the input dates 
-        StartDate = request.form["input_date1"]
-        EndDate = request.form["input_date2"]
-        return redirect("/", code=302)
+        return redirect("/",code=302)
     return render_template("index.html")
 
 
@@ -103,8 +105,9 @@ def filtered_Data():
         "visitorId": visitorId,
         "transactions": transactions,
     }]
-    return jsonify(filtered_data)
+
+    return jsonify({data: filtered_data})
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

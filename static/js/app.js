@@ -84,15 +84,15 @@ var inputStartDate = d3.select("#datetime1");
 var inputEndDate=d3.select("#datetime2");
 
 // Get the value property of the input element
-var StatrDate = inputStartDate.property("value");
+var StartDate = inputStartDate.property("value");
 var EndDate = inputEndDate.property("value");
 
 
 //to detect if there is a input to filter
-if (StatrDate != ''&& EndDate !=''){
+if (StartDate != '' && EndDate !=''){
 //apply the change to the variable in the query script
 //var filteredData = data.filter(data => data.datetime === inputValue);
-console.log(StatrDate);
+console.log(StartDate);
 console.log(EndDate);
 //updatePlot(filteredData)
 ;} 
