@@ -50,9 +50,8 @@ function initializePlot(data) {
         
     //     });
 
-function updatePlot(){
-    var url = "/api/filtered_data/<string:startdate>/<string:enddate>";
-    d3.json(url).then(function(response) {
+function updatePlot(StartDate,EndDate){
+    d3.json("/api/filtered_data/" + StartDate + "/" + EndDate).then(function(response) {
     var data = response;
     console.log(data);
     })
@@ -60,14 +59,12 @@ function updatePlot(){
 
 initializePlot(data);
 
-var button = d3.select("#filter-btn");
-
 //ajax approach with 400 error bad request 
 /*
 $(function() {
   $('button').click(function() {
       $.ajax({
-          url: '/signUpUser',
+          url: '/api/filtered_data/<string:startdate>/<string:enddate>',
           data: $('form').serialize(),
           type: 'POST',
           success: function(response) {
@@ -82,6 +79,7 @@ $(function() {
 */
 
 
+var button = d3.select("#filter-btn");
 button.on("click", function() {
   // Select the start&end date 
   var inputStartDate = d3.select("#datetime1");
@@ -98,7 +96,7 @@ button.on("click", function() {
     console.log('-----------------')
     console.log(StartDate);
     console.log(EndDate);
-    updatePlot();
+    updatePlot(StartDate,EndDate);
 
   } 
   else {
