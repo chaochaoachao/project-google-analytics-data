@@ -1,16 +1,10 @@
-function optionChanged(date){
-  updatePlot(date);
-}
-
-function updatePlot(data) {
-
+function initializePlot(data) {
     var temp_data=data;
     var temp_data_key=[];
 
     //get all cat keys
     Object.keys(temp_data).forEach((k,i) => 
     temp_data_key.push(k));
-    //console.log(temp_data_key);
 
     //convert objects to arrays
     var transactions= Object.keys(temp_data.total_transactions).map(i => temp_data.total_transactions[i]);
@@ -23,21 +17,6 @@ function updatePlot(data) {
     for (i=0;i < date.length;i++){
         date[i]=date[i].toString().replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
     }
-
-    //console.log(transactions);
-    console.log(date);
-
-    //for (i = 0; i < temp_data_key.length; i++) {
-    //var cat=temp_data_key[i]
-    //console.log(cat)
-    //console.log(Object.values(temp_data.cat))
-    
-    // var trace1 = {
-    //     x:date,
-    //     y:transactions,
-    //     type: 'scatter'
-    //  };
-    
 
     //line chart
     var trace1 = [
@@ -56,10 +35,9 @@ function updatePlot(data) {
       };
     Plotly.newPlot("line", data, layout);
 
-    
-  
+    //var Country= Object.keys(temp_data.Country).map(i => temp_data.Country[i]);
+
 }
-    
     //     var temp_data = response;
     //     console.log(temp_data)
     //     //var bounces= temp_data.bounces(data=>data.)
@@ -75,32 +53,64 @@ function updatePlot(data) {
         
     //     });
 
+function updatePlot(StartDate,EndDate){
+    var url = "/api/filtered_data/<startdate>/<enddate>";
+    d3.json(url).then(function(response) {
+    console.log(response);
+    var data = response;
+    })
+}
+
+
+initializePlot(data);
+
 var button = d3.select("#filter-btn");
 
+
+//ajax approach
+/*
+$(function() {
+  $('button').click(function() {
+      $.ajax({
+          url: '/signUpUser',
+          data: $('form').serialize(),
+          type: 'POST',
+          success: function(response) {
+              console.log(response);
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      });
+  });
+});
+*/
+
+
 button.on("click", function() {
+  // Select the start&end date 
+  var inputStartDate = d3.select("#datetime1");
+  var inputEndDate=d3.select("#datetime2");
 
-// Select the start&end date 
-var inputStartDate = d3.select("#datetime1");
-var inputEndDate=d3.select("#datetime2");
+  // Get the value property of the input element
+  var StartDate = inputStartDate.property("value");
+  var EndDate = inputEndDate.property("value");
 
-// Get the value property of the input element
-var StatrDate = inputStartDate.property("value");
-var EndDate = inputEndDate.property("value");
+  //to detect if there is a input to filter
+  if (StartDate != '' && EndDate !=''){
+    //apply the change to the variable in the query script
+    //pass to function updateplot
+    console.log('-----------------')
+    console.log(StartDate);
+    console.log(EndDate);
+    updatePlot(StartDate,EndDate);
+
+  } 
+  else {
+    var filteredData = data;
+    console.log("missing input value")
+  }
+  }
+)
 
 
-//to detect if there is a input to filter
-if (StatrDate != ''&& EndDate !=''){
-//apply the change to the variable in the query script
-//var filteredData = data.filter(data => data.datetime === inputValue);
-console.log(StatrDate);
-console.log(EndDate);
-//updatePlot(filteredData)
-;} 
-
-else {
-  var filteredData = data;
-  console.log("missing input value")
-}
-}); 
-
-updatePlot(data);

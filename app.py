@@ -1,4 +1,6 @@
 # import necessary libraries
+from  sqlalchemy.engine import create_engine
+import json
 import os
 from flask import (
     Flask,
@@ -6,6 +8,9 @@ from flask import (
     jsonify,
     request,
     redirect)
+import plotly.graph_objects as go
+import pandas as pd
+
 
 #################################################
 # Flask Setup
@@ -22,39 +27,13 @@ from google.cloud import bigquery
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
 
 client = bigquery.Client()
+engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
+                       credentials_path='BigQueryCreds.json')
 
-vistorId = []
-transactions = []
 StartDate='20170701'
 EndDate='20170703'
 
-initial_sql=f"""
-    SELECT  visitorId,
-            visitId,
-            visitStartTime,
-            date,
-            totals.visits,
-            totals.hits,
-            totals.timeonsite,
-            totals.bounces,
-            totals.transactions, 
-            totals.transactionrevenue,
-            totals.newvisits,
-            totals.timeonscreen,
-            trafficsource.campaign,
-            trafficsource.keyword,
-            device.ismobile,
-            device.operatingsystem,
-            geonetwork.country,
-            geonetwork.city,
-            geonetwork.networkdomain 
-            FROM 
-            `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-            WHERE _TABLE_SUFFIX BETWEEN '20170701' AND '20170702pyt' """
-
-#create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
-
-# create route that renders index.html template
+create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
 
 
 # Query the database and send the jsonified results
@@ -67,8 +46,8 @@ def send():
         FROM
         `bigquery-public-data.google_analytics_sample.ga_sessions_*`
         WHERE
-        _TABLE_SUFFIX BETWEEN '{StartDate}'
-        AND '{EndDate}'
+        _TABLE_SUFFIX BETWEEN '""" + StartDate +"""'
+        AND '""" + EndDate + """'
         GROUP BY
         date
         ORDER BY
@@ -80,32 +59,28 @@ def send():
     return render_template("index.html", data=result_1)
 
 
-@app.route("/send", methods=["GET", "POST"])
-def sendfromjs():
-    if request.method == "POST":
-        #capture the input dates 
-        StartDate = request.form["input_date1"]
-        EndDate = request.form["input_date2"]
-        return redirect("/", code=302)
-    return render_template("index.html")
-
-
-
-@app.route("/api/filtered_data")
-def filtered_Data():
-    filtered_query = client.query(initial_sql)
-    results = filtered_query.result()
-    print(results)
-    visitorId = [result[0] for result in results]
-    transactions = [result[1] for result in results]
-
-    filtered_data = [{
-        "visitorId": visitorId,
-        "transactions": transactions,
-    }]
-
-    return jsonify(filtered_data)
-
+@app.route("/api/filtered_data/<startdate>/<enddate>")
+def Data(startdate, enddate):
+    query =f"""
+    SELECT 
+        date,
+        SUM ( totals.transactions ) AS total_transactions
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '""" + startdate +"""'
+        AND '""" + enddate + """'
+        GROUP BY
+        date
+        ORDER BY
+        date ASC 
+        """
+    rows = engine.execute(query).fetchall()
+    data = [] 
+    for row in rows: 
+        data.append(dict(zip(row.keys(), row)))
+    output = {"data": data}
+    return jsonify(output)
 
 if __name__ == "__main__":
     app.run()
