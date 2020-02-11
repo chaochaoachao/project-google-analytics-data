@@ -34,9 +34,6 @@ function initializePlot(data) {
       
       };
     Plotly.newPlot("line", data, layout);
-
-    //var Country= Object.keys(temp_data.Country).map(i => temp_data.Country[i]);
-
 }
     //     var temp_data = response;
     //     console.log(temp_data)
@@ -53,22 +50,19 @@ function initializePlot(data) {
         
     //     });
 
-function updatePlot(StartDate,EndDate){
-    var url = "/api/filtered_data/<startdate>/<enddate>";
+function updatePlot(){
+    var url = "/api/filtered_data/<string:startdate>/<string:enddate>";
     d3.json(url).then(function(response) {
-    console.log(response);
     var data = response;
+    console.log(data);
     })
 }
 
-
 initializePlot(data);
-
 
 var button = d3.select("#filter-btn");
 
-
-//ajax approach
+//ajax approach with 400 error bad request 
 /*
 $(function() {
   $('button').click(function() {
@@ -104,7 +98,7 @@ button.on("click", function() {
     console.log('-----------------')
     console.log(StartDate);
     console.log(EndDate);
-    updatePlot(StartDate,EndDate);
+    updatePlot();
 
   } 
   else {
@@ -113,5 +107,4 @@ button.on("click", function() {
   }
   }
 )
-
 

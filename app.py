@@ -12,8 +12,6 @@ import plotly.graph_objects as go
 import pandas as pd
 
 
-
-
 #################################################
 # Flask Setup
 #################################################
@@ -26,7 +24,7 @@ app = Flask(__name__)
 # create route that renders index.html template
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/khaledkhatib/Documents/GitHub/project-google-analytics-data/BigQueryCreds.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
 
 client = bigquery.Client()
 engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
@@ -60,7 +58,7 @@ def send():
     return render_template("index.html", data=result_1)
 
 
-@app.route("/api/filtered_data/<startdate>/<enddate>")
+@app.route("/api/filtered_data/<string:startdate>/<string:enddate>")
 def Data(startdate, enddate):
     query =f"""
     SELECT 
@@ -69,8 +67,8 @@ def Data(startdate, enddate):
         FROM
         `bigquery-public-data.google_analytics_sample.ga_sessions_*`
         WHERE
-        _TABLE_SUFFIX BETWEEN '""" + startdate +"""'
-        AND '""" + enddate + """'
+        _TABLE_SUFFIX BETWEEN '""" +startdate +"""'
+        AND '""" + enddate+"""'
         GROUP BY
         date
         ORDER BY
