@@ -58,7 +58,7 @@ def send():
     return render_template("index.html", data=result_1)
 
 
-@app.route("/api/filtered_data/<string:startdate>/<string:enddate>")
+@app.route("/api/filtered_data/<startdate>/<enddate>")
 def Data(startdate, enddate):
     query =f"""
     SELECT 
@@ -74,6 +74,8 @@ def Data(startdate, enddate):
         ORDER BY
         date ASC 
         """
+    print(query)
+    print(startdate)
     rows = engine.execute(query).fetchall()
     data = [] 
     for row in rows: 
