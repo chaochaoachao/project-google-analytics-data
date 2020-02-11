@@ -33,8 +33,6 @@ engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
 StartDate='20170701'
 EndDate='20170703'
 
-create_temp_sql= f'SELECT vistorId,transactions, FROM `bigquery-public-data.google_analytics_sample.ga_sessions_{input}'
-
 
 # Query the database and send the jsonified results
 @app.route("/")

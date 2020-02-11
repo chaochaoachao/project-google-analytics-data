@@ -17,58 +17,56 @@ function initializePlot(data) {
     for (i=0;i < date.length;i++){
         date[i]=date[i].toString().replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
     }
-
-    //line chart
-    var trace1 = [
-        {
-          x: date,
-          y: transactions,
-          type: 'scatter'
-        }
-      ];
-
-    var data = trace1;
-    var layout = {
-        title: 'Basic Time Series',
-        xaxis: { title: "Date" },
-        yaxis: { title: "Transactions"}
-      
-      };
-    Plotly.newPlot("line", data, layout);
+    Plot(date,transactions)
 }
-    //     var temp_data = response;
-    //     console.log(temp_data)
-    //     //var bounces= temp_data.bounces(data=>data.)
-    //     //var date = temp_data[1]
 
-    //     var bounces = [];
+function Plot(date,transactions){
+  //line chart
+  var trace1 = [
+      {
+        x: date,
+        y: transactions,
+        type: 'scatter'
+      }
+    ];
 
-    //     // Iterate through each recipe object
-    //     temp_data.bounces.forEach((bounce) => {
-    //     // Iterate through each key and value
-    //     Object.entries(bounce).forEach(([key,value]) => {
-    //         bounces.push(value);
-        
-    //     });
+  var data = trace1;
+  var layout = {
+      title: 'Basic Time Series',
+      xaxis: { title: "Date" },
+      yaxis: { title: "Transactions"}
+    
+    };
+  Plotly.newPlot("line", data, layout);
+}
 
 function updatePlot(StartDate,EndDate){
     d3.json("/api/filtered_data/" + StartDate + "/" + EndDate).then(function(response) {
     var new_data = response;
-    console.log("here",new_data);
-    
-    var transactions= Object.keys(new_data.total_transactions).map(i => new_data.total_transactions[i]);
-    var date = Object.keys(new_data.date).map(i => new_data.date[i]);
+    //console.log("here",new_data);
+    new_date=[]
+    new_transactions=[]
+    var data_array= Object.keys(new_data.data).map(i => new_data.data[i]);
+    //var date = Object.keys(new_data.data.date).map(i => new_data.data.date[i]);
+    console.log(data_array)
 
-    console.log(transactions);
-    console.log(date);
-    
+    //console.log(transactions);
+    //console.log(date);
+    for (i=0;i<data_array.length;i++){
+      new_date[i]=data_array[i].date.toString().replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+      new_transactions[i]=data_array[i].total_transactions;
+    }
+    console.log(new_date)
+    console.log(new_transactions)
 
+    //replot
+    Plot(new_date,new_transactions)
     })
 }
 
 initializePlot(data);
 
-//ajax approach with 400 error bad request 
+//ajax approach return with 400 error bad request 
 /*
 $(function() {
   $('button').click(function() {
@@ -86,7 +84,6 @@ $(function() {
   });
 });
 */
-
 
 var button = d3.select("#filter-btn");
 button.on("click", function() {
