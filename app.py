@@ -8,7 +8,7 @@ from flask import (
     jsonify,
     request,
     redirect)
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 import pandas as pd
 
 
@@ -24,11 +24,11 @@ app = Flask(__name__)
 # create route that renders index.html template
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/khaledkhatib/Documents/GitHub/BigQueryCreds.json"
 
 client = bigquery.Client()
-engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
-                       credentials_path='BigQueryCreds.json')
+engine = create_engine('bigquery://My-Project-66194/bigquery-public-data',
+                       credentials_path='/Users/khaledkhatib/Documents/GitHub/BigQueryCreds.json')
 
 StartDate='20170701'
 EndDate='20170703'
@@ -92,12 +92,32 @@ def Data(startdate, enddate):
         ORDER BY
         COUNT (geonetwork.country) DESC
         """    
+
     geo_rows = engine.execute(query_2).fetchall()
     geodata = [] 
     for row in geo_rows: 
         geodata.append(dict(zip(row.keys(), row)))
+
+    query_3 = f"""SELECT
+        geonetwork.country as country,
+        date,
+        SUM ( totals.transactions ) AS total_transactions
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '""" +startdate +"""'
+        AND '""" + enddate+"""'
+        GROUP BY
+        geonetwork.country, date
+        ORDER BY
+        COUNT (geonetwork.country) DESC
+        """    
+    country_rows = engine.execute(query_3).fetchall()
+    countrydata = [] 
+    for row in country_rows: 
+        countrydata.append(dict(zip(row.keys(), row)))
     output = {"data": data,
-    "geodata":geodata}
+    "geodata":geodata,"countrydata":countrydata}
     return jsonify(output)
 
 if __name__ == "__main__":

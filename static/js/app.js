@@ -145,3 +145,16 @@ button.on("click", function() {
   }
 )
 
+var selectDropdown = d3.select("#selDataset")
+
+function addOptions(StartDate,EndDate) {
+  d3.json("/api/filtered_data/" + StartDate + "/" + EndDate).then(function(response) {
+    var countries = response;
+      countries.countrydata.forEach((name) => {
+          var appendOption = selectDropdown.append("option").text(name).attr('value', name)
+      })
+      selectDropdown.selectedIndex = 0
+  })
+}
+
+addOptions(StartDate,EndDate)
