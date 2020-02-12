@@ -47,11 +47,26 @@ function GEO_Plot(Country_name,COUNTRY_count){
     locations: Country_name,
     z: COUNTRY_count,
     text: Country_name,
-    autocolorscale: true
+    autocolorscale: true,
+    colorscale: [
+      [0, 'rgb(242,240,247)'], [0.2, 'rgb(218,218,235)'],
+      [0.4, 'rgb(188,189,220)'], [0.6, 'rgb(158,154,200)'],
+      [0.8, 'rgb(117,107,177)'], [1, 'rgb(84,39,143)']
+  ],
+    colorbar: {
+      title: 'country count',
+      thickness: 0.2
+  },
+  marker: {
+    line:{
+        color: 'rgb(255,255,255)',
+        width: 2
+    }
+}
 }];
 
 var layout = {
-  title: 'Basic ChOropleth Map',
+  title: 'Basic Choropleth Map',
   geo: {
       projection: {
           type: 'robinson'
