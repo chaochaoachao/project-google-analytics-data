@@ -26,13 +26,19 @@ function Plot(date,transactions){
       {
         x: date,
         y: transactions,
-        type: 'scatter'
+        type: 'scatter',
+        mode: 'lines',
+        name: 'transaction over time ',
+        line: {
+          color: 'rgb(219, 64, 82)',
+          width: 3
+        }
       }
     ];
 
   var data = trace1;
   var layout = {
-      title: 'Basic Time Series',
+      title: 'Transactions according to date',
       xaxis: { title: "Date" },
       yaxis: { title: "Transactions"}
     
@@ -61,7 +67,7 @@ function GEO_Plot(Country_name,COUNTRY_count){
 }];
 
 var layout = {
-  title: 'Basic Choropleth Map',
+  title: 'Choropleth Map of country according to counted number',
   geo: {
       projection: {
           type: 'robinson'
