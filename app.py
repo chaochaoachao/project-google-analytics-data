@@ -78,9 +78,6 @@ def Data(startdate, enddate):
     data = [] 
     for row in rows: 
         data.append(dict(zip(row.keys(), row)))
-<<<<<<< Updated upstream
-    output = {"data": data}
-=======
 
     query_2 = f"""SELECT
         geonetwork.country as Country_name,
@@ -95,14 +92,12 @@ def Data(startdate, enddate):
         ORDER BY
         COUNT (geonetwork.country) DESC
         """    
-    
     geo_rows = engine.execute(query_2).fetchall()
     geodata = [] 
     for row in geo_rows: 
         geodata.append(dict(zip(row.keys(), row)))
     output = {"data": data,
     "geodata":geodata}
->>>>>>> Stashed changes
     return jsonify(output)
 
 if __name__ == "__main__":
