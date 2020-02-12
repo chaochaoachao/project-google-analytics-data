@@ -1,6 +1,5 @@
 # import necessary libraries
 from  sqlalchemy.engine import create_engine
-import json
 import os
 from flask import (
     Flask,
