@@ -1,6 +1,5 @@
 # import necessary libraries
 from  sqlalchemy.engine import create_engine
-import json
 import os
 from flask import (
     Flask,
@@ -24,11 +23,11 @@ app = Flask(__name__)
 # create route that renders index.html template
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "BigQueryCreds.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "static/js/BigQueryCreds.json"
 
 client = bigquery.Client()
 engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
-                       credentials_path='BigQueryCreds.json')
+                       credentials_path='static/js/BigQueryCreds.json')
 
 StartDate='20170701'
 EndDate='20170703'
