@@ -40,15 +40,40 @@ function Plot(date,transactions){
   Plotly.newPlot("line", data, layout);
 }
 
+function GEO_Plot(Country_name,COUNTRY_count){
+  var data = [{
+    type: 'choropleth',
+    locationmode: 'country names',
+    locations: Country_name,
+    z: COUNTRY_count,
+    text: Country_name,
+    autocolorscale: true
+}];
+
+var layout = {
+  title: 'Basic ChOropleth Map',
+  geo: {
+      projection: {
+          type: 'robinson'
+      }
+  }
+};
+Plotly.newPlot("geomap", data, layout, {showLink: false});
+}
+
 function updatePlot(StartDate,EndDate){
     d3.json("/api/filtered_data/" + StartDate + "/" + EndDate).then(function(response) {
     var new_data = response;
     //console.log("here",new_data);
     new_date=[]
     new_transactions=[]
+    new_Country_name = []
+    new_COUNTRY_count = []
     var data_array= Object.keys(new_data.data).map(i => new_data.data[i]);
+    var geo_data_array= Object.keys(new_data.geodata).map(i => new_data.geodata[i]);
     //var date = Object.keys(new_data.data.date).map(i => new_data.data.date[i]);
     console.log(data_array)
+    console.log(geo_data_array)
 
     //console.log(transactions);
     //console.log(date);
@@ -59,8 +84,16 @@ function updatePlot(StartDate,EndDate){
     console.log(new_date)
     console.log(new_transactions)
 
+    for (i=0;i<geo_data_array.length;i++){
+      new_Country_name[i]=geo_data_array[i].Country_name;
+      new_COUNTRY_count[i]=geo_data_array[i].COUNTRY_count;
+    }
+    console.log(new_Country_name)
+    console.log(new_COUNTRY_count)
+
     //replot
     Plot(new_date,new_transactions)
+    GEO_Plot(new_Country_name,new_COUNTRY_count)
     })
 }
 
