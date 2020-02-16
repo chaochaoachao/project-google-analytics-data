@@ -17,10 +17,10 @@ function initializePlot(data) {
     for (i=0;i < date.length;i++){
         date[i]=date[i].toString().replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
     }
-    Plot(date,transactions)
+    line_Plot(date,transactions)
 }
 
-function Plot(date,transactions){
+function line_Plot(date,transactions){
   //line chart
   var trace1 = [
       {
@@ -50,8 +50,13 @@ function GEO_Plot(Country_name,COUNTRY_count){
     autocolorscale: true
 }];
 
+<<<<<<< Updated upstream
 var layout = {
   title: 'Basic ChOropleth Map',
+=======
+  var layout = {
+  title: 'Basic Choropleth Map',
+>>>>>>> Stashed changes
   geo: {
       projection: {
           type: 'robinson'
@@ -92,7 +97,7 @@ function updatePlot(StartDate,EndDate){
     console.log(new_COUNTRY_count)
 
     //replot
-    Plot(new_date,new_transactions)
+    line_Plot(new_date,new_transactions)
     GEO_Plot(new_Country_name,new_COUNTRY_count)
     })
 }
