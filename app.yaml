@@ -1,0 +1,9 @@
+application: web-test
+runtime: python
+api_version: 1
+threadsafe: true
+
+handlers:
+- url:/.*
+  script: app.app
+

@@ -119,6 +119,10 @@ select {
 
 }
 
+.iframe {
+  margin-right:500px;
+}
+
 /* input placeholder color changes */
 .form-control::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
