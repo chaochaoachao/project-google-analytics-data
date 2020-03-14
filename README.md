@@ -20,7 +20,7 @@ Note: this repo is ready to be git clone to app engine, there would be some erro
 1. customer segmentation analysis perferly by KNN or K-means
 2. Allow users to select customer groups by drawing on the scatter plot using plotly lasso or D3 lasso
 3. create a email-sending micro service to let user send email to different groups
-4. customer life time value prediction (baseline:logistic regression, will be compared with logLightGBM model)
+4. customer life time value prediction (baseline:logistic regression, will be compared with [lightgbm model](https://github.com/chaochaoachao/project-google-analytics-data/blob/master/BigQuery.ipynb))
 
 optional: add user sign-in microservice and profile page
 
