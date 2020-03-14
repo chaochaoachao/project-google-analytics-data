@@ -2,6 +2,9 @@
 **Steps:**
 Note: this repo is ready to be git clone to app engine, there would be some errors due to app engine is very picky with lines written in the VS code
 
+
+![appengine](/image/appengine.PNG)
+
 1. Used flask(python) to build an interactive web app,  deployed on Google App Engine
 
 2. Extracted the web traffic data from the Google BigQuery public data source(make sure use your own bigquery credentials for bigquery part)
