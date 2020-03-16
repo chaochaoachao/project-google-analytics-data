@@ -159,5 +159,12 @@ button.on("click", function() {
     console.log("missing input value")
   }
   }
-)
+  );
 
+  var button = d3.select("#email_btn");
+  button.on("click", function() {
+    // Select the start&end date 
+    var name = d3.select("#inputName");
+    var email=d3.select("#inputemail");
+    }
+    );
