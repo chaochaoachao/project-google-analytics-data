@@ -1,8 +1,9 @@
 # project-google-analytics-data
+![home](/image/Capture2.PNG)
+
+
 **Steps:**
 Note: this repo is ready to be git clone to app engine, there would be some errors due to app engine is very picky with lines written in the VS code
-
-
 ![appengine](/image/appengine.PNG)
 
 1. Used flask(python) to build an interactive web app,  deployed on Google App Engine
@@ -13,6 +14,7 @@ Note: this repo is ready to be git clone to app engine, there would be some erro
 
 3. Visualized customer demographics with built-in filter options by JavaScript D3 and plotly
 
+![filter button](/image/Capture.PNG)
 4. Performed path analysis of the site traffic using D3 Sankey diagram
 
 5. Embedded a [google data studio dynamic report](https://datastudio.google.com/reporting/14d3bf0f-3b40-4a1c-b38f-f2aae0710b7f) to the web application 
