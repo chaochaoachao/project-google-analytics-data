@@ -21,12 +21,11 @@
 
 <body>
   <div class=" container-scroller">
-   
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="../../index.html"><img src="../../images/logo.svg" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href="../../index.html"></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -112,59 +111,52 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="user-profile">
           <div class="user-image">
-            <img src="../../images/faces/face28.png">
+            <img src="../../images/faces/piro.jpeg">
           </div>
           <div class="user-name">
               Edward Spencer
           </div>
           <div class="user-designation">
-              Developer
+              Marketing Analytics
           </div>
         </div>
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="../../index.html">
               <i class="icon-box menu-icon"></i>
+              <span class="menu-title">Welcome!</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../pages/icons/feather-icons.html">
+              <i class="icon-box menu-icon"></i>
               <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-disc menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../pages/forms/basic_elements.html">
-              <i class="icon-file menu-icon"></i>
-              <span class="menu-title">Form elements</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../pages/charts/chartjs.html">
               <i class="icon-pie-graph menu-icon"></i>
-              <span class="menu-title">Charts</span>
+              <span class="menu-title">Segmentation</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../../pages/tables/basic-table.html">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-command menu-icon"></i>
-              <span class="menu-title">Tables</span>
-            </a>
+              <span class="menu-title">Revenue Prediction</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">User Rev. Predict</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Time Series Predict</a></li>
+                </ul>
+              </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../pages/icons/feather-icons.html">
               <i class="icon-help menu-icon"></i>
               <span class="menu-title">Icons</span>
             </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="icon-head menu-icon"></i>
