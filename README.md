@@ -1,25 +1,30 @@
-# Regal-Free-Bootstrap-Admin-Template
-
-The free and responsive Regal Bootstrap admin template has an easy to comprehend code and detailed documentation. The template is incredible flexible and easy to customize, as SASS preprocessor is used for styling. The template is powered with the Bootstrap framework, jQuery, HTML, CSS, and SASS. It also comes with several page layouts, UI elements, tables, charts, and more components.
-
-Check out the preview of Regal Admin template [here](http://www.templatewatch.com/regal-free/template/index.html)
-
-[![N|Solid](preview.jpg)](http://www.templatewatch.com/regal-free/template/index.html)
+# project-google-analytics-data
+![home](/image/Capture2.PNG)
 
 
-<h2>How to use</h2>
+**Steps:**
+Note: this repo is ready to be git clone to app engine, there would be some errors due to app engine is very picky with lines written in the VS code
+![appengine](/image/appengine.PNG)
 
-<ul>
-  <li>
-    Download or Clone the depositary
-  </li>
-  <li>
-    Open the file template/index.html in a browser to view the demo
-  </li>
-  <li>
-    Start editing the code as per your requirement
-  </li>
-  <li>
-    If you wish to customize the template, use the command 'npm install' to install the necessary dependencies. Refer <a href="http://www.templatewatch.com/regal-free/template/docs/documentation.html">documentaion</a> for more details on customization.
-  </li>
-</ul>
+1. Used flask(python) to build an interactive web app,  deployed on Google App Engine
+
+[applink]:https://flask-web-268019.ue.r.appspot.com/
+
+2. Extracted the web traffic data from the [Google BigQuery public data source](https://console.cloud.google.com/marketplace/details/obfuscated-ga360-data/obfuscated-ga360-data?filter=solution-type:dataset&q=Store&id=45f150ac-81d3-4796-9abf-d7a4f98eb4c6)(make sure use your own bigquery credentials for bigquery part)
+
+3. Visualized customer demographics with built-in filter options by JavaScript D3 and plotly
+
+![filter button](/image/Capture.PNG)
+4. Performed path analysis of the site traffic using D3 Sankey diagram
+
+5. Embedded a [google data studio dynamic report](https://datastudio.google.com/reporting/14d3bf0f-3b40-4a1c-b38f-f2aae0710b7f) to the web application 
+
+
+**Future work(will be done in the final proejct by end of March 2020)**
+1. customer segmentation analysis perferly by KNN or K-means
+2. Allow users to select customer groups by drawing on the scatter plot using plotly lasso or D3 lasso
+3. create a email-sending micro service to let user send email to different groups
+4. customer life time value prediction (baseline:logistic regression, will be compared with [lightgbm model](https://github.com/chaochaoachao/project-google-analytics-data/blob/master/BigQuery.ipynb))
+
+optional: add user sign-in microservice and profile page
+
