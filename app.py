@@ -7,15 +7,27 @@ from flask import (
     jsonify,
     request,
     redirect)
-import plotly.graph_objects as go
+from flask_mail import Mail, Message
+#import plotly.graph_objects as go
 import pandas as pd
-
 
 #################################################
 # Flask Setup
 #################################################
 app = Flask(__name__)
-
+app.config.update(
+    DEBUG = True,  
+    #EMAIL SETTINGS
+    TESTING = False,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 465,
+    MAIL_USE_SSL = True,
+    MAIL_USE_TLS = False,
+    MAIL_USERNAME = 'dq177000@gmail.com',
+    MAIL_PASSWORD = 'wjraoggfdptjmhzi',
+    MAIL_DEFAULT_SENDER ='dq177000@gmail.com'
+)
+mail = Mail(app)
 #################################################
 # Database Setup
 #################################################
@@ -53,6 +65,27 @@ def send():
     results = filtered_query.result().to_dataframe()
     result_1=results.to_dict()
     return render_template("index.html", data=result_1)
+
+
+@app.route("/send_mail", methods=["POST", "GET"])
+def email():
+    #print(email)
+    if request.method == "POST":
+        email = request.form["email"]
+        print(email)
+        try:
+            msg = Message('Hi', 
+            sender = 'dq177000@gmail.com',
+            recipients = [email])
+            mail.send(msg)
+            return redirect("/")
+
+        except:
+            return redirect("/error")
+
+    return render_template("email.html")
+
+    
 
 
 @app.route("/api/filtered_data/<startdate>/<enddate>")

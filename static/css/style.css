@@ -16,6 +16,14 @@ body {
   margin: 0;
 }
 
+#email_btn {
+  position: absolute;
+  bottom: 10px;
+  left: 250px;
+  width: 100px;
+  color:black;
+}
+
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
 .wrapper {
   position: relative;
