@@ -395,3 +395,23 @@ d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
 
         });
    
+        d3.select(window).on("resize", function() {
+          var svgArea = d3.select("body").select("svg");
+        
+         var svgWidth = window.innerWidth;
+       var svgHeight = window.innerHeight;
+       var margin = {
+         top: 50,
+         bottom: 50,
+         right: 50,
+         left: 50
+       };
+       var height = svgHeight - margin.top - margin.bottom;
+       var width = svgWidth - margin.left - margin.right;
+       // Append SVG element
+       svgArea
+         .attr("height", svgHeight)
+         .attr("width", svgWidth);
+     var chartGroup = svg.select("g")
+         .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    });

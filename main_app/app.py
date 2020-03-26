@@ -26,27 +26,27 @@ mail = Mail(app)
 
 @app.route("/")
 def start():
-    return render_template("scattergraph.html")
+    return render_template("index.html")
 
 @app.route("/dashboard")
-def lasso():
+def dashboard():
     return render_template("/dashboard.html")
 
 @app.route("/segmentation")
-def lasso():
+def segmentation():
     return render_template("/segmentation.html")    
 
 @app.route("/revpredict")
-def lasso():
+def revpredict():
     return render_template("/revpredict.html")  
 
 @app.route("/timepredict")
-def lasso():
+def timepredict():
     return render_template("/timepredict.html") 
 
-# @app.route("/documentation")
-# def lasso():
-#     return render_template("/docs/documentation.html")
+@app.route("/documentation")
+def documentation():
+    return render_template("/documentation.html")
 
 
 @app.route("/send_mail/<user_email>", methods=["POST", "GET"])
