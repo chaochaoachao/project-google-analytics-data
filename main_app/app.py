@@ -48,9 +48,6 @@ def lasso():
 # def lasso():
 #     return render_template("/docs/documentation.html")
 
-@app.route("/lasso")
-def lasso():
-    return render_template("lasso.html")
 
 @app.route("/send_mail/<user_email>", methods=["POST", "GET"])
 def email(user_email):

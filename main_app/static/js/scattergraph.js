@@ -16,6 +16,7 @@ const svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
+  
 
 //append an SVG group
 var chartGroup = svg.append("g")
@@ -154,7 +155,7 @@ return circlesGroup;
 
 
 // Import Data
-d3.csv("./static/data/scaled.csv").then(function(nonzeroData) {
+d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
     // Step 1: Parse Data/Cast as numbers
     // ==============================
     nonzeroData.forEach(function(data) {

@@ -14,6 +14,9 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="../static/css/lasso.css">
   <link rel="stylesheet" href="../static/css/style.css">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+
   <!-- endinject -->
   <link rel="shortcut icon" href="../static/images/favicon.png" />
 </head>
@@ -110,11 +113,11 @@
                             <!-- We append our D3 chart here. -->
                           </div>
                           </div>
+                           <button id="email_btn" type="button" class="btn btn-light ">Submit</button>
                           <!-- <p>something about this page here</p> -->
-                          <div class="row">
+                          <div class="row mt-5">
                             <div class="col-md-6">
                               <div class="dropdown row">
-
                                 <label class="col-sm-3">Choose a cluster view:</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value);"> 
@@ -131,7 +134,7 @@
                       <div class="card-img-holder mt-2">
                         <img id="imageToSwap" class="img-fluid" src="../static/images/customer_cluster.png">
                       </div>
-                        <!-- <button id="email_btn" type="button" class="btn btn-light ">Submit</button> -->
+                       
                   </div>
             </div>
           </div>
@@ -169,8 +172,7 @@
   <!-- Custom js for this page-->
   <script src="../static/js/chart.js"></script>
   <script src="../static/js/dashboard.js"></script>
-  <script type="text/javascript" src="../static/js/scattergraph.js"></script>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="../static/js/scattergraph.js"></script>
   <script src="../static/js/d3-lasso.min.js"></script>
   <!-- End custom js for this page-->
 </body>
