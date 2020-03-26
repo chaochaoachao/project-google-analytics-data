@@ -28,6 +28,26 @@ mail = Mail(app)
 def start():
     return render_template("scattergraph.html")
 
+@app.route("/dashboard")
+def lasso():
+    return render_template("/dashboard.html")
+
+@app.route("/segmentation")
+def lasso():
+    return render_template("/segmentation.html")    
+
+@app.route("/revpredict")
+def lasso():
+    return render_template("/revpredict.html")  
+
+@app.route("/timepredict")
+def lasso():
+    return render_template("/timepredict.html") 
+
+# @app.route("/documentation")
+# def lasso():
+#     return render_template("/docs/documentation.html")
+
 @app.route("/lasso")
 def lasso():
     return render_template("lasso.html")
