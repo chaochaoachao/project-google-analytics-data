@@ -7,6 +7,7 @@ from flask import (
     request,
     redirect)
 from flask_mail import Mail, Message
+from password import key
 
 app = Flask(__name__)
 app.config.update(
@@ -18,7 +19,7 @@ app.config.update(
     MAIL_USE_SSL = True,
     MAIL_USE_TLS = False,
     MAIL_USERNAME = 'dq177000@gmail.com',
-    MAIL_PASSWORD = 'wjraoggfdptjmhzi',
+    MAIL_PASSWORD = key,
     MAIL_DEFAULT_SENDER ='dq177000@gmail.com'
 )
 
@@ -49,16 +50,16 @@ def documentation():
     return render_template("/documentation.html")
 
 
-@app.route("/send_mail/<user_email>", methods=["POST", "GET"])
-def email(user_email):
+@app.route("/send_mail/", methods=["POST", "GET"])
+def email():
         try:
-            msg = Message('Hi', 
+            msg = Message('Dear User', 
             sender = 'dq177000@gmail.com',
-            recipients = [user_email])
-            with app.open_resource("static/images/2.jpg") as fp:
-                msg.attach("2.jpg", "image/jpg", fp.read())
+            recipients = ['dq177000@gmail.com','di.qu@mail.utoronto.ca'])
+            with app.open_resource("static/images/favicon.png") as fp:
+                msg.attach("favicon.png", "image/png", fp.read())
             mail.send(msg)
-            return jsonify({"status": "success"})
+            return redirect("/")
 
         except:
             return redirect("/error")
