@@ -294,14 +294,14 @@ d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
       console.log(email)
       
 
-      var button = d3.select("#email-btn");
-      button.on("click", function() {
-      console.log(button)
-      email.forEach(function(user_email){
-        d3.request("/send_email/"+user_email)
-      }) 
-      msgbox("emails sent")
-      });
+      // var button = d3.select("#email-btn");
+      // button.on("click", function() {
+      // console.log(button)
+      // email.forEach(function(user_email){
+      //   d3.request("/send_email/"+user_email)
+      // }) 
+      // msgbox("emails sent")
+      // });
      
       // Reset the style of the not selected dots
       lasso.notSelectedItems()
