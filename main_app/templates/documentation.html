@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Regal Admin Dashboard</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../static/vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../static/css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../images/favicon.png" />
+  <link rel="shortcut icon" href="../static/images/favicon.png" />
 </head>
 
 <body>
@@ -35,10 +35,10 @@
                 <div class="col-12 grid-margin" id="doc-intro">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="mb-4 mt-4">Additional Project Details and Documentation</h3>
-                            <p>Insert a more in-depth overview of all analysis and steps here.</p>
-                            <p>Paragraph 2 if needed</p>
-                            <p class="d-inline"><strong>Note</strong>: Something important here. To get in touch directly, email <a class="d-inline text-info" href="mailto:emailplaceholder@email.com">emailplaceholder@email.com</a></p>
+                            <h3 class="mb-4 mt-4">Data Source</h3>
+                            <p>For this project the data was sourced from a <a href="https://console.cloud.google.com/marketplace/details/obfuscated-ga360-data/obfuscated-ga360-data?filter=solution-type:dataset&q=Store&id=45f150ac-81d3-4796-9abf-d7a4f98eb4c6">Google Analytics Sample dataset: Google Merchandise Store.</a></p>
+                            
+                            <p class="d-inline">To get in touch directly, email <a class="d-inline text-info" href="mailto:di.qu@mail.utoronto.ca">di.qu@mail.utoronto.ca</a> or <a class="d-inline text-info" href="mailto:chao.zhao@mail.utoronto.ca">chao.zhao@mail.utoronto.ca</a></p>
                         </div>
                     </div>
                 </div>
@@ -46,23 +46,27 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="mb-4">Overview</h3>
-                            <p>Include details here.</p>
-                            <p>More details.</p>
+                            <p>Python folder structure is listed below. In order to deploy on the Google App Engine, the folder structure needs to be arranged in this way.</p>
                             <pre>
 main_app/
 ├── static/
       ├── css/
-      ├── docs/
       ├── fonts/
       ├── images/
       ├── js/
       ├── partials/
-      ├── index.html
       ├── scss/
       ├── vendors/
       ├── gulpfile.js
       ├── package.json                           
 ├── templates/
+      ├── index.html
+      ├── dashboard.html
+      ├── segmentation.html
+      ├── revpredict.html
+      ├── timepredict.html
+      ├── documentation.html
+      ├── scattergraph.html
 ├── app.py
 ├── app.yaml
 ├── BigQuery.ipynb
@@ -70,26 +74,32 @@ main_app/
 ├── README.md
 ├── requirements.txt
 </pre>
-                            <p class="mt-1">Insert info here.</p>
-                            <div class="alert alert-success mt-4 d-flex align-items-center" role="alert">
-                              <i class="ti-info-alt mr-4"></i>
-                              <p>Insert interesting things here! :)</p>
-                            </div>
-                            <hr class="mt-5">
-                            <h4 class="mt-4">Approach</h4>
-                            <p class="mb-0">
-                              Things things things <span class="font-weight-bold">things</span> things.
+                            <p class="mt-1">Versions required for Python files:
+                            <li>Flask==1.1.1</li>
+                            <li>google-cloud-bigquery==1.24.0</li>
+                              <li> SQLAlchemy==1.3.11</li>
+                                <li>pybigquery==0.4.13</li>
+                                  <li>pandas==0.24.2</li>
+                                    <li>plotly==4.3.0</li>
                             </p>
-                            <p class="mb-4">Copy copy copy <a href="https://github.com">link</a>. Things.</p>
-                            
-                            <pre class="shell-mode">
-WOW THIS IS COOL</pre>
+                            <hr class="mt-4">
+                            <h4 class="mt-4">Machine Learning Algorithms</h4>
+                            <p class="mb-0">
+                              <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">KMeans from scikit-learn</a> was used to find the customer clusters. </p>
+                              <p class="mb-0"> <a href="https://facebook.github.io/prophet/">Facebook Prophet </a> was used to forecast the total revenue for the next 30 days. </p>
+                                <p class="mb-0"> <a href="https://facebook.github.io/prophet/">Microsoft LightGBW </a> was used to predict revenue at the user level. </p>
+                          
+                           
                             <p class="mt-4">
-                              More about stuff here.
+                              Additional variable correlations matrix below. 
                             </p>
                             <div class="card-img-holder mt-4">
-                              <img class="img-fluid" src="../images/documentation1.png">
-                              <img class="img-fluid" src="../images/documentation2.png">
+                              <img class="img-fluid" src="../static/images/documentation1.png">
+
+                              <p class="mt-4">
+                                Pairplot between the numerical variables below.
+                              </p>
+                              <img class="img-fluid" src="../static/images/documentation2.png">
                             </div> 
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -12,11 +13,10 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-const svg = d3.select("#scatter")
+var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
-  
 
 //append an SVG group
 var chartGroup = svg.append("g")
@@ -394,10 +394,12 @@ d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
     return svg.node();
 
         });
-   
+
+
         d3.select(window).on("resize", function() {
           var svgArea = d3.select("body").select("svg");
-        
+          
+         
          var svgWidth = window.innerWidth;
        var svgHeight = window.innerHeight;
        var margin = {
@@ -414,4 +416,4 @@ d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
          .attr("width", svgWidth);
      var chartGroup = svg.select("g")
          .attr("transform", `translate(${margin.left}, ${margin.top})`);
-    });
+     });
