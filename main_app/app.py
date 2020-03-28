@@ -55,7 +55,8 @@ def email():
         try:
             msg = Message('Dear User', 
             sender = 'dq177000@gmail.com',
-            recipients = ['dq177000@gmail.com','di.qu@mail.utoronto.ca'])
+            recipients = [])
+            print(user_email)
             with app.open_resource("static/images/favicon.png") as fp:
                 msg.attach("favicon.png", "image/png", fp.read())
             mail.send(msg)
