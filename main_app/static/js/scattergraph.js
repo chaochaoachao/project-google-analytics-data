@@ -24,6 +24,7 @@ var chartGroup = svg.append("g")
 
 //initial params
 var chartData = null;
+var email=[];
 
 var chosenXAxis = 'totals_pageviews'
 var chosenYAxis = 'totals_transactionRevenue'
@@ -328,6 +329,18 @@ d3.csv("../static/data/scaled.csv").then(function(nonzeroData) {
         // Get value of selection.
           var value = d3.select(this).attr("value");
           console.log(value)
+          email.push(value)
+          
+          var button = d3.select("#email-btn");
+          button.on("click", function() {
+            console.log(button)
+            email.forEach(function(user_email){
+              d3.json("/send_email/"+user_email)
+          }) 
+      msgbox("emails sent")
+      });
+      
+    
 
         //if select x axises
               if (value === "visitNumber" || value === "totals_hits" || value === "totals_pageviews") {
