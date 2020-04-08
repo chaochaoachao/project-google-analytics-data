@@ -1,4 +1,3 @@
-# import necessary libraries
 from  sqlalchemy.engine import create_engine
 import os
 from flask import (
@@ -8,13 +7,9 @@ from flask import (
     request,
     redirect)
 from flask_mail import Mail, Message
-#import plotly.graph_objects as go
-import pandas as pd
 
-#################################################
-# Flask Setup
-#################################################
 app = Flask(__name__)
+
 app.config.update(
     DEBUG = True,  
     #EMAIL SETTINGS
@@ -27,111 +22,38 @@ app.config.update(
     MAIL_PASSWORD = 'wjraoggfdptjmhzi',
     MAIL_DEFAULT_SENDER ='dq177000@gmail.com'
 )
+
+var email_group = [{email: "di.qu@mail.utoronto.ca",id:"1957458976293878000"},
+{email:"756621114@qq.com", id: "7634897085866546000"},
+{email:"dq177000@gmail.com", id: "9894955795481014000"}];
+
 mail = Mail(app)
-#################################################
-# Database Setup
-#################################################
 
-# create route that renders index.html template
-from google.cloud import bigquery
-
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "static/js/BigQueryCreds.json"
-
-client = bigquery.Client()
-engine = create_engine('bigquery://project-1-257523/bigquery-public-data',
-                       credentials_path='static/js/BigQueryCreds.json')
-
-StartDate='20170701'
-EndDate='20170703'
-
-
-# Query the database and send the jsonified results
 @app.route("/")
-def send():
-    filtered_query = bigquery.Client().query("""
-        SELECT 
-        date,
-        SUM ( totals.transactions ) AS total_transactions
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '""" + StartDate +"""'
-        AND '""" + EndDate + """'
-        GROUP BY
-        date
-        ORDER BY
-        date ASC 
-        """)
-    results = filtered_query.result().to_dataframe()
-    result_1=results.to_dict()
-    return render_template("index.html", data=result_1)
+def start():
+    return render_template("scattergraph.html")
 
+@app.route("/lasso")
+def lasso():
+    return render_template("lasso.html")
 
-@app.route("/send_mail", methods=["POST", "GET"])
-def email():
-    #print(email)
-    if request.method == "POST":
-        email = request.form["email"]
-        print(email)
+@app.route("/send_mail/<user_email>", methods=["POST", "GET"])
+def email(user_email):
         try:
             msg = Message('Hi', 
             sender = 'dq177000@gmail.com',
-            recipients = [email])
+            recipients = [user_email])
+            with app.open_resource("static/images/2.jpg") as fp:
+                msg.attach("2.jpg", "image/jpg", fp.read())
             mail.send(msg)
-            return redirect("/")
+            return jsonify({"status": "success"})
 
         except:
             return redirect("/error")
 
-    return render_template("email.html")
 
-    
-
-
-@app.route("/api/filtered_data/<startdate>/<enddate>")
-def Data(startdate, enddate):
-    query =f"""
-    SELECT 
-        date,
-        SUM ( totals.transactions ) AS total_transactions
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '""" +startdate +"""'
-        AND '""" + enddate+"""'
-        GROUP BY
-        date
-        ORDER BY
-        date ASC 
-        """
-    print(query)
-    print(startdate)
-    rows = engine.execute(query).fetchall()
-    data = [] 
-    for row in rows: 
-        data.append(dict(zip(row.keys(), row)))
-
-    query_2 = f"""SELECT
-        geonetwork.country as Country_name,
-        COUNT (geonetwork.country) AS COUNTRY_count,
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '""" +startdate +"""'
-        AND '""" + enddate+"""'
-        GROUP BY
-        geonetwork.country
-        ORDER BY
-        COUNT (geonetwork.country) DESC
-        """    
-    geo_rows = engine.execute(query_2).fetchall()
-    geodata = [] 
-    for row in geo_rows: 
-        geodata.append(dict(zip(row.keys(), row)))
-    output = {"data": data,
-    "geodata":geodata}
-    return jsonify(output)
 
 if __name__ == "__main__":
     app.run()
+
 

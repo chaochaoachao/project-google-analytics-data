@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Regal Admin Dashboard</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../static/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../static/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../static/images/favicon.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="main-panel w-100  documentation">
+        <div class="content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 doc-header">
+                <a class="btn btn-success" href="/"><i class="icon-air-play mx-0 mr-2"></i>Back to home</a>
+                <h1 class="text-primary mt-4">Documentation</h1>
+              </div>
+            </div>
+            <div class="row doc-content">
+              <div class="col-12 col-md-10 offset-md-1">
+                <div class="col-12 grid-margin" id="doc-intro">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="mb-4 mt-4">Data Source</h3>
+                            <p>For this project the data was sourced from a <a href="https://console.cloud.google.com/marketplace/details/obfuscated-ga360-data/obfuscated-ga360-data?filter=solution-type:dataset&q=Store&id=45f150ac-81d3-4796-9abf-d7a4f98eb4c6">Google Analytics Sample dataset: Google Merchandise Store.</a></p>
+                            
+                            <p class="d-inline">To get in touch directly, email <a class="d-inline text-info" href="mailto:di.qu@mail.utoronto.ca">di.qu@mail.utoronto.ca</a> or <a class="d-inline text-info" href="mailto:chao.zhao@mail.utoronto.ca">chao.zhao@mail.utoronto.ca</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 grid-margin" id="doc-started">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="mb-4">Overview</h3>
+                            <p>Python folder structure is listed below. In order to deploy on the Google App Engine, the folder structure needs to be arranged in this way.</p>
+                            <pre>
+main_app/
+├── static/
+      ├── css/
+      ├── fonts/
+      ├── images/
+      ├── js/
+      ├── partials/
+      ├── scss/
+      ├── vendors/
+      ├── gulpfile.js
+      ├── package.json                           
+├── templates/
+      ├── index.html
+      ├── dashboard.html
+      ├── segmentation.html
+      ├── revpredict.html
+      ├── timepredict.html
+      ├── documentation.html
+      ├── scattergraph.html
+├── app.py
+├── app.yaml
+├── BigQuery.ipynb
+├── CHANGELOG.md
+├── README.md
+├── requirements.txt
+</pre>
+                            <p class="mt-1">Versions required for Python files:
+                            <li>Flask==1.1.1</li>
+                            <li>google-cloud-bigquery==1.24.0</li>
+                              <li> SQLAlchemy==1.3.11</li>
+                                <li>pybigquery==0.4.13</li>
+                                  <li>pandas==0.24.2</li>
+                                    <li>plotly==4.3.0</li>
+                            </p>
+                            <hr class="mt-4">
+                            <h4 class="mt-4">Machine Learning Algorithms</h4>
+                            <p class="mb-0">
+                              <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">KMeans from scikit-learn</a> was used to find the customer clusters. </p>
+                              <p class="mb-0"> <a href="https://facebook.github.io/prophet/">Facebook Prophet </a> was used to forecast the total revenue for the next 30 days. </p>
+                                <p class="mb-0"> <a href="https://facebook.github.io/prophet/">Microsoft LightGBW </a> was used to predict revenue at the user level. </p>
+                          
+                           
+                            <p class="mt-4">
+                              Additional variable correlations matrix below. 
+                            </p>
+                            <div class="card-img-holder mt-4">
+                              <img class="img-fluid" src="../static/images/documentation1.png">
+
+                              <p class="mt-4">
+                                Pairplot between the numerical variables below.
+                              </p>
+                              <img class="img-fluid" src="../static/images/documentation2.png">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- partial:../partials/_footer.html -->
+
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-centre">
+            <span class="text-muted text-center float-sm-right text-sm-left d-block d-sm-inline-block">UofT Data Analytics Bootcamp 2020 </a></span>
+            
+          </div>
+        </footer>
+
+        <!-- partial -->
+      </div>
+    </div>
+  </div>
+<!-- plugins:js -->
+<script src="../vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../js/off-canvas.js"></script>
+<script src="../js/hoverable-collapse.js"></script>
+<script src="../js/template.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../js/documentation.js"></script> 
+<!-- End custom js for this page-->
+</body>
+
+</html>
