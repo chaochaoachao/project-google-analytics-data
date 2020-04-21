@@ -5,8 +5,6 @@ an interactive web app deplyed on google app engine
 [applink](http://analyticsproject2020-03-27.appspot.com/)
 
 
-![home](/image/Capture2.PNG)
-
 
 **Steps:**
 ![appengine](/image/appengine.PNG)
