@@ -31,9 +31,9 @@ Stage II work:
 
 3. create a email-sending micro service to let user send email to user selected group in step 2.
 
-4. customer life time value prediction with [lightgbm model](https://github.com/chaochaoachao/project-google-analytics-data/blob/master/BigQuery.ipynb)
-revenue vs time prediction using facebook prophet model, add US hoildays to the seasonality
+4. customer life time value prediction with [lightgbm model](https://github.com/chaochaoachao/project-google-analytics-data/blob/master/BigQuery.ipynb)\
+ as well as a revenue vs time prediction using facebook prophet model, add US hoildays to the seasonality
 
-5. load the model and label encoding with the pickle on the prediction page 
+5. load the model and label encoding with the pickle on the prediction page, make the prediction after users' input 
 ![lasso](/image/predict.PNG)
 
