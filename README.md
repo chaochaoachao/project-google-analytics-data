@@ -1,14 +1,18 @@
 # project-google-analytics-data
+
+an interactive web app deplyed on google app engine
+
+[applink](http://analyticsproject2020-03-27.appspot.com/)
+
+
 ![home](/image/Capture2.PNG)
 
 
 **Steps:**
-Note: this repo is ready to be git clone to app engine, there would be some errors due to app engine is very picky with lines written in the VS code
 ![appengine](/image/appengine.PNG)
 
 1. Used flask(python) to build an interactive web app,  deployed on Google App Engine
 
-[applink]:https://flask-web-268019.ue.r.appspot.com/
 
 2. Extracted the web traffic data from the [Google BigQuery public data source](https://console.cloud.google.com/marketplace/details/obfuscated-ga360-data/obfuscated-ga360-data?filter=solution-type:dataset&q=Store&id=45f150ac-81d3-4796-9abf-d7a4f98eb4c6)(make sure use your own bigquery credentials for bigquery part)
 
