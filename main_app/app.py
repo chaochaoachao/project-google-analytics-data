@@ -7,9 +7,25 @@ from flask import (
     request,
     redirect)
 from flask_mail import Mail, Message
-from password import key
+import numpy as np
+import lightgbm as lgb
+import pickle
+
+# load encoder in deploy
+
+file = open("model/dict_all.obj",'rb')
+dict_all_loaded = pickle.load(file)
+file.close()
+
+# prediction model
+
+model = lgb.Booster(model_file='lgb_classifier.txt')
+
 
 app = Flask(__name__)
+
+# email config
+
 app.config.update(
     DEBUG = True,  
     #EMAIL SETTINGS
@@ -19,7 +35,7 @@ app.config.update(
     MAIL_USE_SSL = True,
     MAIL_USE_TLS = False,
     MAIL_USERNAME = 'dq177000@gmail.com',
-    MAIL_PASSWORD = key,
+    #MAIL_PASSWORD = key,
     MAIL_DEFAULT_SENDER ='dq177000@gmail.com'
 )
 
@@ -37,12 +53,18 @@ def dashboard():
 def segmentation():
     return render_template("/segmentation.html")    
 
-@app.route("/revpredict")
-def revpredict():
+@app.route("/revpredict", methods=['POST'])
+def revpredict():   
+    features = [int(x) for x in request.form.values()]
+    print(features)
+    #final_features = [np.array(features)]
+    #prediction = model.predict(final_features)
+    #output = round(prediction[0], 2)
     return render_template("/revpredict.html")  
 
 @app.route("/timepredict")
 def timepredict():
+
     return render_template("/timepredict.html") 
 
 @app.route("/documentation")

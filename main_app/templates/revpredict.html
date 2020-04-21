@@ -98,10 +98,55 @@
           <div class="row mt-3">
             <div class="col-xl-12 d-flex grid-margin stretch-card">
                 <div class="card">
+
                   <div class="card-body">
+                    <h3>Revenue Prediction Form</h3> 
+                    <div> 
+                      <form action="/result" method="POST"> 
+                        <label for="totals_hits">Hits</label> 
+                        <input type="text" id="totals.hits" name="totals.hits">btw:[0-1000]
+                        <br> 
+
+                        <label for="totals_pageviews">Pageviews</label> 
+                        <input type="text" id="totals.pageviews" name="totals.pageviews">btw:[0-99999]
+                        <br>
+
+                        <label for="visitStartTime">visitStartTime</label> 
+                        <input type="text" id="visitStartTime" name="visitStartTime">in unix timestamp,eg: 1472830385
+                        <br> 
+
+                        <label for="totals_hits">visitnumber</label> 
+                        <input type="text" id="visitNumber" name="visitNumber">btw:[0-99999]
+                        <br> 
+
+                        <label for="trafficSource.referralPath">referralPath</label> 
+                        <input type="text" id="trafficSource.referralPath" name="trafficSource.referralPath">eg:/search
+                        <br> 
+
+                        <label for="geoNetwork.country">country</label> 
+                        <select id="geoNetwork.country" name="geoNetwork.country"> 
+                          <option value="0">US</option> 
+                          <option value="36">Canada</option> 
+                          <option value="132">Mexico</option> 
+                          <option value="217">UK</option> 
+                          <option value="102">Japan</option> 
+                          <option value="0">Unknown</option> 
+
+
+                        </select> 
+                        <br> 
+          
+                        <br> 
+                        <input type="submit" value="Submit"> 
+                        
+                      </form> 
+                    </div> 
+                    <br>
                       <h4 class="card-title">Feature Importance</h4>
                       <div class="row mt-3">
                         <div class="col-lg-12">
+
+
                           <p>This visual was produced using LightGBM (machine learning model) and the data was pre-processed (cleaning up, transforming) and standardized. We applied exploratory data analysis (EDA) techniques to extract user insights. 
                             The results below show user website information in order of importance as they relate to customer lifetime value. Once this information was parsed, the data was sent to the model in order to predict a customer lifetime value view.
                             The model gives the root mean square error of 1.7132878091459502.</p>
