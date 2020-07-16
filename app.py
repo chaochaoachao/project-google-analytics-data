@@ -23,7 +23,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER ='di.qu@mail.utoronto.ca'
 )
 
-var email_group = [{email: "di.qu@mail.utoronto.ca",id:"1957458976293878000"},
+var email_group = [
 {email:"756621114@qq.com", id: "7634897085866546000"},
 {email:"dq177000@gmail.com", id: "9894955795481014000"}];
 
