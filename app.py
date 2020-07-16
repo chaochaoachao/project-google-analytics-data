@@ -20,7 +20,7 @@ app.config.update(
     MAIL_USE_TLS = False,
     MAIL_USERNAME = 'dq177000@gmail.com',
     MAIL_PASSWORD = 'wjraoggfdptjmhzi',
-    MAIL_DEFAULT_SENDER ='di.qu@mail.utoronto.ca'
+    MAIL_DEFAULT_SENDER ='dq177000@gmail.com'
 )
 
 var email_group = [{email: "di.qu@mail.utoronto.ca",id:"1957458976293878000"},
